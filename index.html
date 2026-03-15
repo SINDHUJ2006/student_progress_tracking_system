@@ -1,34 +1,61 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
 <head>
-    <title>Student Progress Tracking System</title>
-    <link rel="stylesheet" href="styles.css">
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotknack - Student Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      font-family: 'Poppins', sans-serif;
+    }
+    .card {
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .btn-custom {
+      background: #4facfe;
+      color: #fff;
+      font-weight: bold;
+    }
+    .btn-custom:hover {
+      background: #00c6fb;
+    }
+  </style>
 </head>
-<body class="bg-light">
-   <div class = "container vh-100 d-flex align-items-center justify-content-center">
-    <div class ="row w-100 justify-content-center">
-        <div class = "col-md-6">
-            <div class ="card shadow p-4">
-                <div class="text-center">
-                    <img src="spotknackimg.webp" class="img-fluid mb-2" width="100">
-                    <h4 class="text">Student Login</h4>
-                </div>
-                <form onsubmit="return validationForm()" >
-                    <div class="mb-3">
-                        <label class="form-label">Username</label>
-                        <input type="text" id="username"class="form-control" placeholder="Enter username">
-                        <br><br><label class="form-label">Password</label>
-                        <input type="password" id="password" class="form-control" placeholder="Enter password"><br>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100" >
-                        Login
-                    </button>
-                </form>
-                <script src="script.js"></script>
-            </div>
-        </div>
+<body class="d-flex align-items-center justify-content-center vh-100">
+
+  <div class="card p-4" style="width: 350px;">
+    <div class="text-center">
+      <img src="spotknackimg.webp" class="img-fluid mb-2" width="100" alt="Spotknack Logo">
+      <h4 class="mb-3">Student Login</h4>
     </div>
-    </div>
+    <form onsubmit="return validationForm()">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" id="username" class="form-control" placeholder="Enter username">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" id="password" class="form-control" placeholder="Enter password">
+      </div>
+      <button type="submit" class="btn btn-custom w-100">Login</button>
+    </form>
+  </div>
+
+  <script>
+    function validationForm() {
+      let user = document.getElementById("username").value.trim();
+      let pass = document.getElementById("password").value.trim();
+      if (user === "" || pass === "") {
+        alert("Important: Please fill all fields.");
+        return false;
+      }
+      window.location.href = "progress.html"; 
+      return false;
+    }
+  </script>
+
 </body>
 </html>
