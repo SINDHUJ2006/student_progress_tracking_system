@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Progress Tracking</title>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
     body {
       background-color: azure;
@@ -15,41 +17,68 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
     .result-box {
-      margin-top: 1rem;
+      margin-top: 10px;
       font-weight: bold;
-      color: #333;
     }
   </style>
 </head>
-<body class="d-flex align-items-center justify-content-center vh-100">
 
-  <div class="card p-4" style="width: 400px;">
-    <h4 class="text-center mb-3">Student Progress Tracking</h4>
-    <p class="text-muted text-center">Track academic performance and metrics easily.</p>
-    <div class="mb-3">
-      <input type="number" id="n1" class="form-control mb-2" placeholder="Enter Task 1 score">
-      <input type="number" id="n2" class="form-control mb-2" placeholder="Enter Task 2 score">
-      <div class="d-flex justify-content-between">
-        <button onclick="calculate('+')" class="btn btn-success">Add</button>
-        <button onclick="calculate('-')" class="btn btn-danger">Subtract</button>
-      </div>
-      <div id="result" class="result-box"></div>
+<body class="d-flex justify-content-center align-items-center vh-100">
+
+  <div class="card p-4" style="width:400px;">
+    
+    <h4 class="text-center">Student Progress Tracking</h4>
+    <p id="welcomeMsg" class="text-center text-primary"></p>
+
+    <input type="number" id="n1" class="form-control mb-2" placeholder="Enter Task 1 score">
+    <input type="number" id="n2" class="form-control mb-2" placeholder="Enter Task 2 score">
+
+    <div class="d-flex justify-content-between mt-2">
+      <button onclick="calculate('+')" class="btn btn-success">Add</button>
+      <button onclick="calculate('-')" class="btn btn-danger">Subtract</button>
     </div>
+
+    <div id="result" class="result-box text-center"></div>
+
   </div>
 
   <script>
+    // DISPLAY DATA WHEN PAGE LOADS
+    window.onload = function () {
+      let name = localStorage.getItem("studentName");
+      let t1 = localStorage.getItem("task1");
+      let t2 = localStorage.getItem("task2");
+      let res = localStorage.getItem("result");
+
+      if (name) {
+        document.getElementById("welcomeMsg").innerText = "Welcome, " + name;
+      }
+
+      if (t1) document.getElementById("n1").value = t1;
+      if (t2) document.getElementById("n2").value = t2;
+
+      if (res) {
+        document.getElementById("result").innerText = "Saved Result: " + res;
+      }
+    };
+
     function calculate(op) {
       let n1 = parseFloat(document.getElementById("n1").value);
       let n2 = parseFloat(document.getElementById("n2").value);
       let res;
+
       if (isNaN(n1) || isNaN(n2)) {
         res = "Invalid input";
       } else {
-        switch (op) {
-          case '+': res = n1 + n2; break;
-          case '-': res = n1 - n2; break;
-        }
+        if (op === '+') res = n1 + n2;
+        if (op === '-') res = n1 - n2;
+
+        // STORE DATA
+        localStorage.setItem("task1", n1);
+        localStorage.setItem("task2", n2);
+        localStorage.setItem("result", res);
       }
+
       document.getElementById("result").innerText = "Result: " + res;
     }
   </script>
